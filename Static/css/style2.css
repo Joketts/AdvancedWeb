@@ -1,0 +1,189 @@
+h10 {
+    font-family:Dancing Script;
+    font-size: 60px;
+    color: #d8baba;
+}
+
+h3 {
+    font-family:Dancing Script;
+    font-size: 50px;
+    text-align: center;
+    color:#1a1a1a;
+}
+
+h5 {
+    font-family:Dancing Script;
+    font-size: 35px;
+    color: #d8baba;
+}
+
+
+p {
+    text-decoration: none;
+    list-style-type: none;
+    font-family:Arial;
+    line-height: 1.5;
+    color: #d8baba;
+}
+
+p1{
+    font-size: 50px;
+    color: #d8baba;
+    font-family:Arial;
+}
+p3{
+    font-size: 25px;
+    color: #d8baba;
+    font-family:Arial;
+}
+h4 {
+    font-family:Arial;
+    font-size: 17px;
+    color: #d8baba;
+    font-weight: normal;
+}
+/*header*/
+
+header {
+    padding: 2em;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:stretch;
+}
+
+
+/*footer */
+
+footer {
+    display: block;
+    position: absolute;
+    padding: 0em;
+    height: 4em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-top: 2px solid #ff8c00;
+    align-items: center;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    z-index: 0;
+}
+
+@media (max-width: 1500px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        height: 6em;
+    }
+}
+
+.left-align {
+    text-align: left;
+    margin: 15px;
+}
+
+.right-align {
+    text-align: right;
+    margin: 15px;
+
+}
+
+header {background-color:#1a1a1a;}
+footer {background-color: #1a1a1a;}
+nav1 ul {background-color: #1a1a1a;}
+body {background-color: #474646;}
+
+/* Nav Bar*/
+
+nav1 ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 2px solid #ff8c00;
+    border-top: 2px solid #ff8c00;
+}
+
+nav1 li {
+    float: left;
+    border-right: 1px solid #ff8c00;
+}
+
+nav1 li a {
+    display: block;
+    font-size: 17px;
+    color: #d8baba;
+    text-align: center;
+    padding: 2em 2.7em;
+    font-family:Arial;
+    text-decoration: none;
+
+}
+
+nav1 li:hover {
+    transition: all 0.3s;
+    background-color:#ff8c00;
+
+}
+
+nav1 li a:hover{
+    color: black;
+}
+
+@media (max-width: 1500px) {
+    nav1 ul a{
+        padding: 1em 1.4em;
+    }
+}
+
+@media (max-width: 600px) {
+    nav1 ul a{
+        padding: 0.5em 0.95em;
+    }
+}
+
+/*main*/
+
+html{
+    position:relative;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+body {
+    margin: 0;
+    padding:0;
+    min-height: 100%
+
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+aside {
+    flex: 1;
+    padding: 2em;
+    min-width: 50%;
+}
+
+
+
+.Images {
+    border-radius: 25px;
+    box-shadow: 5px 5px 50px rgb(24, 17, 17);
+    Width:70%;
+    Height:auto;
+    animation-name: ogfade;
+    animation-duration: 0.5s;
+}

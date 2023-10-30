@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--account page for signing in and out-->
+
+<!--Code for creating modals, connecting and using firebase and outputting,
+    I'd never used firebase,so I used:https://firebase.google.com/docs/web/setup?authuser=0&hl=en & https://www.youtube.com/watch?v=4d-gIPGzmK4&list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB&ab_channel=TheNetNinja
+    The Tutorial was outdated, but by using the firebase docs with this I wrote this code
+    More on this in the report
+ -->
+
+<head>
+
+  <title>Seasoned Selections</title>
+
+    <meta name="Foods" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}"/>
+
+    <!--gets style sheet for materialize-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!--gets style sheet from google fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+    <header class = "header">
+
+      <h10>Seasoned Selections </h10>
+
+    </header>
+
+    <!--nav bar with modal-triggers-->
+    <nav1>
+        <div>
+            <ul>
+                <li><a href="/index/">Back Home</a></li>
+                <li class="logged-in">
+                  <a href="#" class="modal-trigger" data-target="modal-account">Account</a>
+                </li>
+                <li class="logged-in">
+                  <a href="#" id="logout">Logout</a>
+                </li>
+                <li class="logged-out">
+                  <a href="#" class="modal-trigger" data-target="modal-login">Login</a>
+                </li>
+                <li class="logged-out">
+                  <a href="#" class="modal-trigger" data-target="modal-signup">Sign up</a>
+                </li>
+            </ul>
+        </div>
+    </nav1>
+
+
+    <!-- modal displayed as on overlay contains form for users to input account details-->
+    <div id="modal-signup" class="modal">
+      <div class="modal-content">
+        <h3>Sign up</h3>
+        <form id="signup-form">
+            <div class="input-field">
+              <input type="email" id="signup-email" required />
+                <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="signup-password" required />
+                <label for="signup-password">Password</label>
+            </div>
+          <button>Sign up</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- modal displayed as on overlay contains form for users to input account details-->
+    <div id="modal-login" class="modal">
+      <div class="modal-content">
+        <h3>Login</h3>
+        <form id="login-form">
+            <div class="input-field">
+                <input type="email" id="login-email" required />
+                <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="login-password" required />
+                <label for="login-password">Password</label>
+            </div>
+          <button>Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- modal displayed as on overlay contains account details of current user-->
+    <div id="modal-account" class="modal">
+      <div class="modal-content center-align">
+        <h3>Account details</h3>
+        <div class="account-details"></div>
+      </div>
+    </div>
+
+    <!-- container containing images to fill page-->
+    <div class= "container">
+
+        <aside>
+            <div class="image_container">
+                <img class="Images" src="../../../../OneDrive/Documents/Web/part2/wbFood-master/Images/Food3.jpg">
+            </div>
+        </aside>
+
+        <aside>
+            <div class="image_container">
+                <img class="Images" src="../../../../OneDrive/Documents/Web/part2/wbFood-master/Images/Food8.jpg">
+            </div>
+        </aside>
+    </div>
+
+    <!--Script used on account.html copied to show user is logged on, on the main page (only shows in console)-->
+    <script type="module">
+
+        //imports the required functions from firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+        import{ getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js';
+
+        //firebase config for my account
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7ZR3yQF8SzBv5jWp47FgO6TweEH7hUh4",
+            authDomain: "mywebsitedatabase-2ff3e.firebaseapp.com",
+            projectId: "mywebsitedatabase-2ff3e",
+            storageBucket: "mywebsitedatabase-2ff3e.appspot.com",
+            messagingSenderId: "1000470139412",
+            appId: "1:1000470139412:web:af3ee0e35596f81c628d01",
+            measurementId: "G-2Y86DCEM5R"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        //gets account details class to update the innerhtml
+        const accountDetails = document.querySelector('.account-details');
+
+        //when page is loaded
+        onAuthStateChanged(auth, user =>{
+            if(user) {
+                //if a user is logged
+                //generates html with user.email and last sign in time
+                const html =`
+                    <div>Logged in as ${user.email}</div>
+                    <div>Last logged in: ${user.metadata.lastSignInTime}</div>
+                `;
+                //updates html so account details are shown when account is clicked
+                accountDetails.innerHTML = html;
+                //displays user logged in (current user) in console
+                console.log('user logged in: ', user)
+            } else {
+                //updates html so account details shows no user logged in
+                accountDetails.innerHTML = 'No user logged in';
+                //displays user logged out to console
+                console.log('user logged out')
+            }
+        })
+
+        //listening for signup-form submission
+        const signupForm = document.querySelector('#signup-form')
+        signupForm.addEventListener('submit', (e) =>{
+            //stops navigating to new page or reloading page
+            e.preventDefault();
+
+            //gets email and password from signupForm
+            const email = signupForm['signup-email'].value;
+            const password = signupForm['signup-password'].value;
+
+            //Firebase Authentication function to create a new user account gives out unique credentials
+            //passes through Authentication, users email and password
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((cred) =>{
+                    //gets user data from cred
+                    const user = cred.user;
+
+                    //gets modal-signup
+                    const modal = document.querySelector('#modal-signup')
+                    //gets an instance of modal
+                    M.Modal.getInstance(modal).close();
+                    //closes form
+                    signupForm.reset();
+
+                })
+
+        });
+
+        //listening for click of logout
+        const logout = document.querySelector('#logout');
+        logout.addEventListener('click', (e) =>{
+            e.preventDefault();
+            //signs user out
+            signOut(auth).then(() => {
+
+            }).catch((error) => {
+
+            });
+        });
+
+        //listening for login-form to be submitted
+        const loginForm = document.querySelector('#login-form');
+        loginForm.addEventListener('submit', (e) =>{
+            e.preventDefault()
+
+            const email = loginForm['login-email'].value;
+            const password = loginForm['login-password'].value;
+
+            //Firebase Authentication function to sign in a user
+            //passes through Authentication, users email and password
+            signInWithEmailAndPassword(auth, email, password)
+                .then((cred) =>{
+                    //gets modal-login then resets it
+                    const modal = document.querySelector('#modal-login')
+                    M.Modal.getInstance(modal).close();
+                    loginForm.reset();
+                })
+        });
+    </script>
+
+    <!--Links to js files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../OneDrive/Documents/Web/part2/wbFood-master/scripts/index.js"></script>
+</body>
+</html>

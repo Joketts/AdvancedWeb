@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <title>YCOA Ald'ruhn's Echo</title>
+
+        <meta name="Foods" content="width=device-width, initial-scale=1">
+
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
+        <!--gets style sheet from google fonts-->
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+
+    </head>
+
+
+    <body>
+
+        <header class = "header">
+            <h1>Ald'ruhn's Echo : Adventure Begins</h1>
+        </header>
+
+        <nav class = "nav">
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="/index/account/">Account</a></li>
+            </ul>
+        </nav>
+
+        <!--flex container-->
+        <div class = container>
+            <div class = visable_box>
+                <main>
+                    <h3>Game description</h3>
+
+                    <p>The game is set in a medieval fantasy world where players take on the role of a survivor.
+                        Their main goal is to survive and progress amidst the chaos and challenges of this new world.
+                        Along the way, they will encounter various characters, make decisions, and face consequences
+                        that shape the outcome of their journey.
+                    </p>
+                </main>
+            </div>
+
+            <aside>
+                <div class="image_container">
+                    <img class="Images" src="../../../../OneDrive/Documents/Web/part2/wbFood-master/Images/Food9.jpg">
+                </div>
+            </aside>
+
+            <footer class="footer">
+                <h4 class="left-align">Contact Information: SeasonedSections@gmail.com</h4>
+                <h4 class="right-align"> Instagram: @Seasoned_Selections</h4>
+            </footer>
+
+        </div>
+
+        <!--Script used on account.html copied to show user is logged on, on the main page (only shows in console)-->
+        <script type="module">
+
+            //imports the required functions from firebase
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+            import{ getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js';
+
+            //firebase config for my account
+            const firebaseConfig = {
+                apiKey: "AIzaSyB7ZR3yQF8SzBv5jWp47FgO6TweEH7hUh4",
+                authDomain: "mywebsitedatabase-2ff3e.firebaseapp.com",
+                projectId: "mywebsitedatabase-2ff3e",
+                storageBucket: "mywebsitedatabase-2ff3e.appspot.com",
+                messagingSenderId: "1000470139412",
+                appId: "1:1000470139412:web:af3ee0e35596f81c628d01",
+                measurementId: "G-2Y86DCEM5R"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            //When page is loaded
+            onAuthStateChanged(auth, user =>{
+                //if a user is logged in display user in console
+                if(user) {
+                    console.log('user logged in: ', user)
+                } else {
+                    //display no user in console
+                    console.log('user logged out')
+                }
+            })
+        </script>
+
+        <!-- function to open and close sidebar & to display shaded overlay-->
+        <script>
+        function cmd_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function cmd_close() {
+
+            //gets sidebar element
+            var sidebar = document.getElementById("mySidebar");
+            //runs the closing animation class
+            sidebar.classList.add("SideBar_close_animation");
+
+            //event listener waiting for animation to be completed
+            sidebar.addEventListener("animationend",function() {
+                //removes the animation so function can be repeated
+                sidebar.classList.remove("SideBar_close_animation");
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+        }, {once: true});
+        }
+
+        </script>
+    </body>
+
+</html>
