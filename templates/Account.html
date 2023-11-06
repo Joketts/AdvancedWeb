@@ -15,7 +15,7 @@
 
     <meta name="Foods" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}"/>
+  <link href="{{ url_for('static', filename='css/style2.css') }}" rel="stylesheet"/>
 
     <!--gets style sheet for materialize-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -30,9 +30,7 @@
 
 
     <header class = "header">
-
-      <h10>Seasoned Selections </h10>
-
+      <h10>Account</h10>
     </header>
 
     <!--nav bar with modal-triggers-->
@@ -106,13 +104,13 @@
 
         <aside>
             <div class="image_container">
-                <img class="Images" src="../../../../OneDrive/Documents/Web/part2/wbFood-master/Images/Food3.jpg">
+                <img class="Images" src="">
             </div>
         </aside>
 
         <aside>
             <div class="image_container">
-                <img class="Images" src="../../../../OneDrive/Documents/Web/part2/wbFood-master/Images/Food8.jpg">
+                <img class="Images" src="">
             </div>
         </aside>
     </div>
@@ -121,7 +119,7 @@
     <script type="module">
 
         //imports the required functions from firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js';
         import{ getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js';
 
         //firebase config for my account
@@ -225,6 +223,6 @@
 
     <!--Links to js files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="../../../../OneDrive/Documents/Web/part2/wbFood-master/scripts/index.js"></script>
+    <script src="scripts/index.js"></script>
 </body>
 </html>

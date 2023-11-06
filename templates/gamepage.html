@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>CYOA Game</title>
+
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <header class = "header">
+            <h1>Ald'ruhn's Echo : Adventure Begins</h1>
+        </header>
+
+        <nav class = "nav">
+           <ul>
+
+            </ul>
+        </nav>
+        <div class = container>
+
+            <div class = visable_box>
+                <p>{{ page_text }}</p>
+            </div>
+
+            <aside>
+                <ul>
+                    {% for choice_name, choice_destination in choices.items() %}
+                        <li><a href="{{ url_for('make_choice', choice_name=choice_name) }}" class="button">{{ choice_name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </aside>
+
+            <footer class="footer">
+                <ul>
+                    <li><a href="#" id="restartBtn">Restart</a></li>
+                    <li><a href="#" id="backBtn">Back</a></li>
+                    <li><a href="#" id="saveBtn">Save</a></li>
+                    <li><a href="#" id="closeBtn">Close</a></li>
+                </ul>
+            </footer>
+        </div>
+    </body>
+
+    <script>
+        // Get references to the buttons
+        const restartBtn = document.getElementById('restartBtn');
+        const backBtn = document.getElementById('backBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const closeBtn = document.getElementById('closeBtn');
+
+        // Add event listeners and define functions for button actions
+        restartBtn.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            // Your code to restart the game or reload the initial page goes here
+            // For example:
+            // window.location.href = '/index'; // Redirect to the starting page
+        });
+
+        backBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            // Make an AJAX request to the server to trigger the 'go back' action
+            fetch('/go_back', {
+                method: 'POST',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.content) {
+                        // Handle the response data (new content) here
+                        console.log(data.content);
+                    } else {
+                        console.log('Cannot go back.'); // Handle no previous page case
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+        saveBtn.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            // Your code to save game progress or perform save functionality goes here
+            // For example:
+            // YourLogic.saveGame(); // Implement logic to save game progress
+        });
+
+        closeBtn.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            window.location.href = '/index/';
+        });
+    </script>
+
+</html>

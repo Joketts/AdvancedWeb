@@ -23,8 +23,8 @@ h5 {
 p {
     text-decoration: none;
     list-style-type: none;
-   font-family:Arial;
-   line-height: 1.5;
+    font-family:Arial;
+    line-height: 1.5;
     color: #d8baba;
 }
 
@@ -67,11 +67,10 @@ header {
 
 /*footer */
 
-footer {
+footer{
     display: block;
     position: absolute;
-    padding: 0em;
-    height: 4em;
+    height: 6em;
     bottom: 0;
     left: 0;
     right: 0;
@@ -80,126 +79,37 @@ footer {
     align-items: center;
 }
 
-.footer {
-    display: flex;
-    justify-content: space-between;
-    z-index: 0;
-}
-
-@media (max-width: 1500px) {
-  .footer {
-    flex-direction: column;
-    align-items: center;
-    height: 6em;
-  }
-}
-
-.left-align {
-    text-align: left;
-    margin: 15px;
-}
-  
-.right-align {
-    text-align: right;
-    margin: 15px;
-
-}
-
-
-
-/* Side Bar*/
-
-.mySidebar{
-    background-color:#1a1a1a;
-    height:100%; 
-    width:360px;
-    position:fixed;
-    top:0;
-    right:0;
-    box-shadow: -15px 0 0 #ff8c00;
-    z-index:2;
-}
-
-.mySidebar a {
-    text-decoration: none;
-    font-family:Arial;
-    font-size: 25px;
-    color: #d8baba;
-    width:100%;
-    display:block;
-    text-align:left; 
-    padding: 17px 30px;
+footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
     border-bottom: 2px solid #ff8c00;
-    z-index:1;
+    border-top: 0px solid #ff8c00;
 }
 
-.mySidebar a:first-child {
-    font-size: 35px;
+footer li {
+    float: left;
+    border-right: 1px solid #ff8c00;
 }
 
-
-.mySidebar a:hover{
-    background-color: #474646;
+footer li a {
+    display: block;
+    color: #d8baba;
+    text-align: center;
+    padding: 2em 2.7em;
+    font-family:Arial;
+    text-decoration: none;
 }
 
-.SideBar_animation{
-    position:fixed;
-    animation:fadeRight 0.6s;
-    z-index:1;
-}
-.SideBar_close_animation{
-    position:fixed;
-    animation:fadeLeft 0.3s;
-    z-index:1;
-
-} 
-
-    @keyframes fadeRight{
-        from{
-            right:-300px;
-            opacity:0
-        } 
-        to
-        {
-            right:0;
-            opacity:1;
-        }
-    }
-
-    @keyframes fadeLeft {
-        from {
-          right: 0;
-          opacity: 1;
-        }
-        to {
-          right: -300px;
-          opacity: 0;
-        }
-      }
-
-.display_overlay{
-    position:fixed;
-    display:none;
-    height:100%;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background-color:rgba(0,0,0,0.7);
-    z-index:0;
-    animation: moveIn 0.6s forwards;
+footer li:hover {
+    transition: all 0.3s;
+    background-color:#ff8c00;
 }
 
-@keyframes moveIn{
-    from{
-        width:100%
-    } 
-    to
-    {
-        width:calc(100% - 375px);
-    }
+footer li a:hover{
+    color: black;
 }
-
 
 
 /*Colours*/
@@ -232,13 +142,11 @@ nav li a {
     padding: 2em 2.7em;
     font-family:Arial;
     text-decoration: none;
-    
 }
 
 nav li:hover {
     transition: all 0.3s;
     background-color:#ff8c00;
-   
 }
 
 nav li a:hover{
@@ -273,9 +181,9 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    min-height: 70em;
+    flex-direction: column;
+    align-self: center;
+    min-height: 45em;
     margin-bottom: 0px;
 }
 main {
@@ -283,18 +191,45 @@ main {
 }
 
 main p {
-    text-align: left;
+    text-align: center;
     font-size: 22px;
     color:#d8baba;
 
 }
 
 aside {
-    flex: 0 0 40%;
-    text-align: center;
-    margin: 25px 0px;
-    min-width: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
+
+aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+}
+.button {
+    display: inline-block;
+    padding: 20px 40px;
+    margin: 10px;
+    text-decoration: none;
+    color:#d8baba;
+    background-color: #1a1a1a;
+    border: 1px solid black;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+
+
 
 .visable_box {
     background-color: #1a1a1a;
@@ -304,6 +239,7 @@ aside {
     border-radius: 25px;
     box-shadow: 5px 5px 25px rgb(24, 17, 17);
 }
+/*
 @media (max-width: 1500px) {
   .container {
     flex-direction: column;
@@ -319,159 +255,9 @@ aside {
       min-height: 135em;
     }
 }
+*/
 
-/*API output*/
-.meals{
-    background-color: #474646;
-    padding: 1em;
-    min-height: 75vh;
-}
-.searchbox{
-    padding: 1em;
-    margin: 1em;
-}
-.input-box{
-    padding: 0.8em;
-    margin: 1em;
-    font-size: 20px;
-    border: 2px solid;
-    color: black;
-    border-radius: 25px;
-    box-shadow: 5px 5px 25px rgb(24, 17, 17);
-}
-.search-button{
-    padding: 1em;
-    margin-left: 4em;
-    border: 2px solid;
-    border-radius: 15px;
-    box-shadow: 5px 5px 25px rgb(24, 17, 17);
-}
-@media (max-width: 580px) {
-    .input-box{
-        padding: 0.8em;
-        margin: 1em;
-        font-size: 16px;
-    }
-
-}
-
-.mealoutputs{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    flex-wrap: wrap;
-}
-
-.mealOption{
-    background-color: #1a1a1a;
-    border: 2px solid black;
-    border-radius: 25px;
-    box-shadow: 5px 5px 25px rgb(24, 17, 17);
-    display: flex;
-    margin: 1em;
-    flex-direction: column;
-    height: 30em;
-    max-width: 27em;
-    align-items: center;
-    margin-bottom: 5em;
-    padding: 1em;
-}
-
-@media (max-width: 700px) {
-    .mealoutputs{
-        flex-direction: column;
-        padding: 1em;
-    }
-
-    .mealOption{
-        height: 250px;
-        width: 350px;
-        margin-bottom: 7em;
-        padding: 0.5em;
-    }
-}
-
-.mealname {
-    width: 100%;
-    text-align: center;
-    padding: 0em 0;
-    margin-bottom: 1em;
-
-}
-
-.recipe{
-    color: #d8baba;
-    position: fixed;
-    top:30%;
-    left: 22%;
-    align-self: center;
-    background-color: #1a1a1a;
-    border: 2px solid #ff8c00;
-    border-radius: 25px;
-    box-shadow: 5px 5px 25px #ff8c00;
-    display: none;
-    flex-direction: column;
-    padding: 1em;
-    margin-bottom: 5em;
-    width: 60%;
-    overflow-y: scroll;
-}
-
-.recipe::-webkit-scrollbar{
-    width: 10px;
-}
-
-.recipe::-webkit-scrollbar-thumb{
-    background: #ff8c00;
-    border-radius: 25px;
-}
-.top-line{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-}
-.recipe-name{
-    text-align: center;
-
-}
-
-.close-recipe {
-    padding: 1em;
-    font-size: 20px;
-    background-color: #474646;
-    border: 2px solid;
-    color: black;
-    border-radius: 25px;
-    box-shadow: 5px 5px 25px rgb(24, 17, 17);
-    height: 100px;
-    width: 250px;
-}
-
-.recipe-link a{
-    color: #d8baba;
-
-}
-
-@media (max-width: 1000px){
-    .recipe{
-        top:10%;
-    }
-}
-
-@media (max-width: 580px) {
-
-    .meals{
-        min-height: 215em;
-    }
-
-    .close-recipe {
-        padding: 1em;
-        font-size: 17px;
-        height: 75px;
-        width: 200px;
-    }
-}
+/
 
 /*images*/
 
@@ -506,12 +292,7 @@ aside {
     animation-duration: 0.5s;
 }
 
-.image_container:hover img{
-    content: url("../Images/Food10.jpg");
-    animation-name: imgfade;
-    animation-duration: 1.5s;
 
-}
 
 .Images_2 {
     border-radius: 25px;
@@ -522,12 +303,7 @@ aside {
     animation-duration: 0.5s;
 }
 
-.Images_2:hover{
-    content: url("../Images/Food12.jpg");
-    animation-name: imgfade;
-    animation-duration: 1.5s;
 
-}
 
 .Images_3 {
     border-radius: 25px;
@@ -538,19 +314,4 @@ aside {
     animation-duration: 0.5s;
 }
 
-.Images_3:hover{
-    content: url("../Images/Yellow1.jpg");
-    animation-name: imgfade;
-    animation-duration: 1.5s;
-
-}
-@keyframes imgfade {
-    from {opacity: .5}
-    to {opacity: 1}
-}
-
-@keyframes ogfade {
-    from {opacity: .5}
-    to {opacity: 1}
-}
 
