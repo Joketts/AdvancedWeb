@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from cyoa_game import CYOAGame, story
 from flask_sqlalchemy import *
 from Database import db
@@ -28,7 +28,7 @@ def game_page():
 @app.route("/index/game_saved")
 def game_page_saved():
     game.reset_game()
-    player_id = ''
+    player_id = '456'
     game.load_progress(player_id)
     page_content = game.get_current_page_content()
     return render_template('gamepage.html', page_text=page_content['text'], choices=page_content['choices'])
@@ -50,9 +50,11 @@ def go_back():
 @app.route('/index/game/save_progress', methods=['POST'])
 def save_progress():
     # Assuming 'game' is an instance of your CYOAGame class
-    player_id = ''  # Replace with your logic to identify the player
+    #player_id = '456'  # Replace with your logic to identify the player
 
-    game.save_progress(player_id)  # Call the save_progress method from your CYOAGame instance
+    firebase_user_id = request.json.get('firebase_user_id')  # Retrieve Firebase user ID from the request
+
+    game.save_progress(firebase_user_id)  # Call the save_progress method from your CYOAGame instance
 
     return jsonify(status='success')  # Return a JSON response to indicate success
 
