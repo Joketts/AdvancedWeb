@@ -1,12 +1,12 @@
 from flask import Flask, render_template, jsonify
-from AdvancedWeb.cyoa_game import CYOAGame, story
+from cyoa_game import CYOAGame, story
 from flask_sqlalchemy import *
 from Database import db
 
 app = Flask(__name__)
 game = CYOAGame(story)
 
-#database = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///PlayerProgress.db'
 db.init_app(app)
 with app.app_context():
