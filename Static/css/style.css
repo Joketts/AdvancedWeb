@@ -19,15 +19,23 @@ h5 {
     color: #d8baba;
 }
 
-
 p {
     text-decoration: none;
     list-style-type: none;
-   font-family:Arial;
-   line-height: 1.5;
+    font-family:Arial;
+    line-height: 1.5;
+    font-size: 40px;
     color: #d8baba;
 }
 
+aside ul a {
+    text-decoration: none;
+    list-style-type: none;
+    font-family:Arial;
+    line-height: 1.5;
+    font-size: 40px;
+    color: #d8baba;
+}
 p1{
     font-size: 50px;
     color: #d8baba;
@@ -48,13 +56,21 @@ h4 {
 
 header {
     padding: 2em;
+    text-align: center;
 }
 
 .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items:stretch;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.header h1 {
+    text-align: center;
+    /* Other styles */
 }
 
 .side_button{
@@ -67,17 +83,49 @@ header {
 
 /*footer */
 
-footer {
+footer{
     display: block;
     position: absolute;
-    padding: 0em;
-    height: 4em;
+    height: 6em;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
     border-top: 2px solid #ff8c00;
     align-items: center;
+}
+
+
+footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 2px solid #ff8c00;
+    border-top: 0px solid #ff8c00;
+}
+
+footer li {
+    float: left;
+    border-right: 1px solid #ff8c00;
+}
+
+footer li a {
+    display: block;
+    color: #d8baba;
+    text-align: center;
+    padding: 2em 2.7em;
+    font-family:Arial;
+    text-decoration: none;
+}
+
+footer li:hover {
+    transition: all 0.3s;
+    background-color:#ff8c00;
+}
+
+footer li a:hover{
+    color: black;
 }
 
 .footer {
@@ -118,17 +166,20 @@ nav ul {background-color: #1a1a1a;}
 /* Nav Bar*/
 
 nav ul {
+    display: flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     border-bottom: 2px solid #ff8c00;
     border-top: 2px solid #ff8c00;
+    justify-content: center;
 }
   
 nav li {
-    float: left;
+    justify-content: center;
     border-right: 1px solid #ff8c00;
+    border-left: 2px solid #ff8c00;
 }
 
 nav li a {
@@ -138,13 +189,11 @@ nav li a {
     padding: 2em 2.7em;
     font-family:Arial;
     text-decoration: none;
-    
 }
 
 nav li:hover {
     transition: all 0.3s;
     background-color:#ff8c00;
-   
 }
 
 nav li a:hover{
@@ -179,9 +228,9 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    min-height: 70em;
+    flex-direction: column;
+    align-self: center;
+    min-height: 64em;
     margin-bottom: 0px;
 }
 main {
@@ -189,17 +238,42 @@ main {
 }
 
 main p {
-    text-align: left;
+    text-align: center;
     font-size: 22px;
     color:#d8baba;
 
 }
 
 aside {
-    flex: 0 0 40%;
-    text-align: center;
-    margin: 25px 0px;
-    min-width: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.button {
+    display: inline-block;
+    padding: 20px 40px;
+    margin: 10px;
+    text-decoration: none;
+    color:#d8baba;
+    background-color: #1a1a1a;
+    border: 1px solid black;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;
 }
 
 .visable_box {
@@ -210,6 +284,8 @@ aside {
     border-radius: 25px;
     box-shadow: 5px 5px 25px rgb(24, 17, 17);
 }
+
+
 @media (max-width: 1500px) {
   .container {
     flex-direction: column;
@@ -225,8 +301,6 @@ aside {
       min-height: 135em;
     }
 }
-
-/
 
 /*images*/
 
@@ -251,6 +325,8 @@ aside {
     Height:auto;
     animation-name: ogfade;
     animation-duration: 0.5s;
+    display: block; /* Ensures the image behaves as a block element */
+    margin: 0 auto; /* Centers the image horizontally within the flex container */
 }
 .Images_other{
     border-radius: 25px;
@@ -277,8 +353,8 @@ aside {
 .Images_3 {
     border-radius: 25px;
     box-shadow: 5px 5px 50px rgb(24, 17, 17);
-    Width:70%;
-    Height:auto;
+    Width: 70%;
+    Height: auto;
     animation-name: ogfade;
     animation-duration: 0.5s;
 }

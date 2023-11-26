@@ -5,12 +5,11 @@
     <head>
         <title>YCOA Ald'ruhn's Echo</title>
 
-        <meta name="Foods" content="width=device-width, initial-scale=1">
+        <meta name="index_page" content="width=device-width, initial-scale=1">
 
         <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
         <!--gets style sheet from google fonts-->
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
-
     </head>
 
 
@@ -22,8 +21,11 @@
 
         <nav class = "nav">
             <ul>
-                <li><a href="/index/game/">Play</a></li>
-                <li><a href="/index/account/">Account</a></li>
+
+                <li><a href="/index/game">Play New Game</a></li>
+                <li><a href="/index/game_saved">Continue Previous Game</a></li>
+                <li><a href="/index/account">Account</a></li>
+
             </ul>
         </nav>
 
@@ -43,17 +45,54 @@
 
             <aside>
                 <div class="image_container">
-                    <img class="Images" src="{{ url_for('static', filename='img/cat.png') }}">
+
+                    <img class="Images" src="{{ url_for('static', filename='img/background4.jpg') }}">
+
                 </div>
             </aside>
 
             <footer class="footer">
                 <h4 class="left-align"></h4>
-                <h4 class="right-align"> /h4>
+                <h4 class="right-align"></h4>
             </footer>
-
         </div>
+    </body>
+
+
+<script type="module">
+
+            //imports the required functions from firebase
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+            import{ getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js';
+
+            //firebase config for my account
+            const firebaseConfig = {
+                apiKey: "AIzaSyB7ZR3yQF8SzBv5jWp47FgO6TweEH7hUh4",
+                authDomain: "mywebsitedatabase-2ff3e.firebaseapp.com",
+                projectId: "mywebsitedatabase-2ff3e",
+                storageBucket: "mywebsitedatabase-2ff3e.appspot.com",
+                messagingSenderId: "1000470139412",
+                appId: "1:1000470139412:web:af3ee0e35596f81c628d01",
+                measurementId: "G-2Y86DCEM5R"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            //When page is loaded
+            onAuthStateChanged(auth, user =>{
+                //if a user is logged in display user in console
+                if(user) {
+                    console.log('user logged in: ', user)
+                } else {
+                    //display no user in console
+                    console.log('user logged out')
+                }
+            })
+        </script>
 
     </body>
+
 
 </html>
