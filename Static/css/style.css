@@ -19,15 +19,23 @@ h5 {
     color: #d8baba;
 }
 
-
 p {
     text-decoration: none;
     list-style-type: none;
     font-family:Arial;
     line-height: 1.5;
+    font-size: 40px;
     color: #d8baba;
 }
 
+aside ul a {
+    text-decoration: none;
+    list-style-type: none;
+    font-family:Arial;
+    line-height: 1.5;
+    font-size: 40px;
+    color: #d8baba;
+}
 p1{
     font-size: 50px;
     color: #d8baba;
@@ -48,13 +56,21 @@ h4 {
 
 header {
     padding: 2em;
+    text-align: center;
 }
 
 .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items:stretch;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.header h1 {
+    text-align: center;
+    /* Other styles */
 }
 
 .side_button{
@@ -122,17 +138,20 @@ nav ul {background-color: #1a1a1a;}
 /* Nav Bar*/
 
 nav ul {
+    display: flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     border-bottom: 2px solid #ff8c00;
     border-top: 2px solid #ff8c00;
+    justify-content: center;
 }
   
 nav li {
-    float: left;
+    justify-content: center;
     border-right: 1px solid #ff8c00;
+    border-left: 2px solid #ff8c00;
 }
 
 nav li a {
@@ -183,7 +202,7 @@ body {
     display: flex;
     flex-direction: column;
     align-self: center;
-    min-height: 45em;
+    min-height: 64em;
     margin-bottom: 0px;
 }
 main {
@@ -201,6 +220,7 @@ aside {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: 20px;
 }
 
@@ -209,8 +229,8 @@ aside ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-
 }
+
 .button {
     display: inline-block;
     padding: 20px 40px;
@@ -228,9 +248,6 @@ aside ul {
     background-color: #45a049;
 }
 
-
-
-
 .visable_box {
     background-color: #1a1a1a;
     margin: 25px;
@@ -239,7 +256,8 @@ aside ul {
     border-radius: 25px;
     box-shadow: 5px 5px 25px rgb(24, 17, 17);
 }
-/*
+
+
 @media (max-width: 1500px) {
   .container {
     flex-direction: column;
@@ -255,9 +273,6 @@ aside ul {
       min-height: 135em;
     }
 }
-*/
-
-/
 
 /*images*/
 
@@ -282,6 +297,8 @@ aside ul {
     Height:auto;
     animation-name: ogfade;
     animation-duration: 0.5s;
+    display: block; /* Ensures the image behaves as a block element */
+    margin: 0 auto; /* Centers the image horizontally within the flex container */
 }
 .Images_other{
     border-radius: 25px;
@@ -308,8 +325,8 @@ aside ul {
 .Images_3 {
     border-radius: 25px;
     box-shadow: 5px 5px 50px rgb(24, 17, 17);
-    Width:70%;
-    Height:auto;
+    Width: 70%;
+    Height: auto;
     animation-name: ogfade;
     animation-duration: 0.5s;
 }

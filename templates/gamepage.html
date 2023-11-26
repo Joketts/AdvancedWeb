@@ -29,7 +29,7 @@
             </div>
 
             <aside>
-                <ul>
+                <ul id="choiceList">
                     {% for choice_name, choice_destination in choices.items() %}
                         <li><a href="{{ url_for('make_choice', choice_name=choice_name) }}" class="button">{{ choice_name }}</a></li>
                     {% endfor %}
@@ -58,16 +58,25 @@
         restartBtn.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default link behavior
 
-            // Your code to restart the game or reload the initial page goes here
-            // For example:
-            // window.location.href = '/index'; // Redirect to the starting page
+            fetch('/index/game/reset_game', {
+                    method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Game restarted!');
+                // Optionally, you can perform additional actions upon game restart
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
 
         backBtn.addEventListener('click', function (event) {
             event.preventDefault();
 
             // Make an AJAX request to the server to trigger the 'go back' action
-            fetch('/go_back', {
+            fetch('/index/game/go_back', {
                 method: 'POST',
             })
                 .then(response => response.json())
@@ -75,6 +84,8 @@
                     if (data.content) {
                         // Handle the response data (new content) here
                         console.log(data.content);
+                        updateGameContent(data.content);
+                        window.location.reload();
                     } else {
                         console.log('Cannot go back.'); // Handle no previous page case
                     }
@@ -84,19 +95,72 @@
                 });
         });
 
+        function updateGameContent(content) {
+            // Update the game content on the page based on the received data
+            const pageText = content.text; // Assuming text is present in the response
+            const choices = content.choices; // Assuming choices are present in the response
+
+            // Update the page elements with the new content
+            // Example: Replace the text content of an element with ID 'gameText'
+            document.getElementById('page_text').innerText = pageText;
+            document.getElementById('for choice_name, choice_destination in choices.items()').innerText = choices;
+            // You can update other elements or UI components as needed based on the response
+        }
+
         saveBtn.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default link behavior
-
-            // Your code to save game progress or perform save functionality goes here
-            // For example:
-            // YourLogic.saveGame(); // Implement logic to save game progress
+            fetch('/index/game/save_progress', {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Progress saved!');
+                // Optionally handle success or display a message
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
+
 
         closeBtn.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default link behavior
 
-            window.location.href = '/index/';
+            window.location.href = '/index';
         });
     </script>
+
+    <script type="module">
+
+            //imports the required functions from firebase
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+            import{ getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js';
+
+            //firebase config for my account
+            const firebaseConfig = {
+                apiKey: "AIzaSyB7ZR3yQF8SzBv5jWp47FgO6TweEH7hUh4",
+                authDomain: "mywebsitedatabase-2ff3e.firebaseapp.com",
+                projectId: "mywebsitedatabase-2ff3e",
+                storageBucket: "mywebsitedatabase-2ff3e.appspot.com",
+                messagingSenderId: "1000470139412",
+                appId: "1:1000470139412:web:af3ee0e35596f81c628d01",
+                measurementId: "G-2Y86DCEM5R"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            //When page is loaded
+            onAuthStateChanged(auth, user =>{
+                //if a user is logged in display user in console
+                if(user) {
+                    console.log('user logged in: ', user)
+                } else {
+                    //display no user in console
+                    console.log('user logged out')
+                }
+            })
+        </script>
 
 </html>

@@ -1,8 +1,12 @@
 # cyoa_game.py
 
+from Database import db, PlayerProgress
+
+
 class CYOAGame:
     def __init__(self, story):
         self.story = story
+        self.reset = 'start'
         self.current_page = 'start'  # Initial page
         self.previous_page = None
 
@@ -18,13 +22,30 @@ class CYOAGame:
         else:
             return None
 
+    def save_progress(self, player_id):
+        progress = PlayerProgress.query.filter_by(player_id=player_id).first()
+        if not progress:
+            progress = PlayerProgress(player_id=player_id)
+        progress.current_page = self.current_page
+        db.session.add(progress)
+        db.session.commit()
+
+    def load_progress(self, player_id):
+        progress = PlayerProgress.query.filter_by(player_id=player_id).first()
+        if progress:
+            self.current_page = progress.current_page
+            return self.get_current_page_content()
+
+    def reset_game(self):
+        self.current_page = self.reset  # Set current_page back to the starting page
+        self.previous_page = None  # Reset previous_page to None
+
     def go_back(self):
         if self.previous_page:
             self.current_page, self.previous_page = self.previous_page, None  # Swap current and previous
             return {'text': self.story[self.current_page]['text'], 'choices': self.story[self.current_page]['choices']}
         else:
             return None  # No previous page, cannot go back
-
 
 
 # Your story dictionary containing pages and choices
