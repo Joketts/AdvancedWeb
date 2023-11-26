@@ -9,7 +9,7 @@ h1 {
 
 h3 {
     font-family: Dancing Script, serif;
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
     color: #d8baba;
 }
@@ -25,7 +25,7 @@ p {
     list-style-type: none;
     font-family: Arial;
     line-height: 1.5;
-    font-size: 40px;
+    font-size: 35px;
     color: #d8baba;
 }
 
@@ -34,7 +34,7 @@ aside ul a {
     list-style-type: none;
     font-family:Arial;
     line-height: 1.5;
-    font-size: 40px;
+    font-size: 35px;
     color: #d8baba;
 }
 p1{
@@ -187,9 +187,9 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start; /* Align items to the start of the cross axis */
-    justify-content: space-between; /* Spread items evenly */
+    flex-direction: column;
+    /*align-items: flex-start; /* Align items to the start of the cross axis */
+    justify-content: space-around; /* Spread items evenly */
 }
 main {
     flex: 1;
@@ -204,8 +204,6 @@ main p {
 
 aside {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
     margin-top: 20px;
 }
@@ -217,6 +215,16 @@ aside ul {
     overflow: hidden;
 }
 
+#choiceList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#choiceList li {
+  display: inline; /* Ensures the list items are displayed in a row */
+  margin: 0 5px; /* Adjust spacing between buttons */
+}
 .button {
     display: inline-block;
     padding: 20px 40px;
@@ -275,10 +283,11 @@ aside ul {
     }
 }
 
+
 .Images {
     border-radius: 25px;
     box-shadow: 5px 5px 50px rgb(24, 17, 17);
-    Width:75%;
+    Width:70%;
     Height:auto;
     animation-name: ogfade;
     animation-duration: 0.5s;
@@ -294,6 +303,8 @@ aside ul {
     animation-duration: 0.5s;
 }
 
+
+
 .Images_2 {
     border-radius: 25px;
     box-shadow: 5px 5px 50px rgb(24, 17, 17);
@@ -302,6 +313,8 @@ aside ul {
     animation-name: ogfade;
     animation-duration: 0.5s;
 }
+
+
 
 .Images_3 {
     border-radius: 25px;
