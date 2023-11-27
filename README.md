@@ -16,4 +16,5 @@ and another for saving user reviews
 ![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/0cb03461-afc6-49df-b8d8-26ab09d2a354)
 
 
-![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/f86a90d9-b3ce-4aea-95b1-17bfcb200d1f)
+![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/14b0847d-dddb-4a48-8e7e-ed627c7ffbcc)
+
