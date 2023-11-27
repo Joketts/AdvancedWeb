@@ -9,9 +9,11 @@ Database for saving player progress
 
 and another for saving user reviews
 
-![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/7e2d53e4-ecdc-428c-bb80-13fa1583a8e8)
 
-![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/519f4bc6-e19d-43b3-8b1d-398dd59ed670)
+![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/cf6a99c7-4ecc-49cb-a3e7-f6605c69a664)
 
-![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/911b7a13-6031-48bf-8e6b-56a773cf4eb0)
 
+![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/0cb03461-afc6-49df-b8d8-26ab09d2a354)
+
+
+![image](https://github.com/Joketts/AdvancedWeb/assets/123466936/f86a90d9-b3ce-4aea-95b1-17bfcb200d1f)
