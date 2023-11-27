@@ -55,7 +55,53 @@ header {
     align-items:stretch;
 }
 
+/* Style the entire account section */
+.account-section {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
 
+/* Style the review submission form */
+#review-form {
+    margin-top: 20px;
+}
+
+/* Style the review input textarea */
+#review-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing of the textarea */
+}
+
+/* Style the container for existing reviews */
+.reviews {
+    margin-top: 20px;
+}
+
+/* Style individual review items */
+.review {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.review p {
+    margin: 0;
+}
+
+/* Style user name or any metadata in the review */
+.review p:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
 /*footer */
 
 footer {

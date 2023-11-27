@@ -191,6 +191,7 @@ body {
     /*align-items: flex-start; /* Align items to the start of the cross axis */
     justify-content: space-around; /* Spread items evenly */
 }
+
 main {
     flex: 1;
 }
@@ -215,15 +216,14 @@ aside ul {
     overflow: hidden;
 }
 
-#choiceList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+.displayitem{
+     display: inline-block;
+    padding: 20px 40px;
+    margin: 10px;
+    text-decoration: none;
+    color:#d8baba;
+    background-color: #1a1a1a;
 
-#choiceList li {
-  display: inline; /* Ensures the list items are displayed in a row */
-  margin: 0 5px; /* Adjust spacing between buttons */
 }
 .button {
     display: inline-block;
@@ -250,6 +250,29 @@ aside ul {
     border-radius: 25px;
     box-shadow: 5px 5px 25px rgb(24, 17, 17);
 }
+
+#choiceList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#choiceList li {
+  display: inline; /* Ensures the list items are displayed in a row */
+  margin: 0 5px; /* Adjust spacing between buttons */
+}
+
+#item_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#item_list li {
+  display: inline; /* Ensures the list items are displayed in a row */
+  margin: 0 5px; /* Adjust spacing between buttons */
+}
+
 
 /*
 @media (max-width: 1500px) {

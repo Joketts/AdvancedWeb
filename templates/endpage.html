@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html>
 
+<!DOCTYPE html>
+<html lang="en">
 
     <head>
-        <title>YCOA Ald'ruhn's Echo</title>
+        <meta charset="UTF-8">
+        <title>CYOA Game</title>
 
-        <meta name="index_page" content="width=device-width, initial-scale=1">
-
-        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
-        <!--gets style sheet from google fonts-->
+        <link href="{{ url_for('static', filename='css/style3.css') }}" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
-    </head>
 
+    </head>
 
     <body>
 
@@ -20,46 +18,33 @@
         </header>
 
         <nav class = "nav">
-            <ul>
-                <li><a href="/index/game">Play New Game</a></li>
-                <li><a href="/index/game_saved" id = "game_saved_btn">Continue Previous Game</a></li>
-                <li><a href="/index/account">Account</a></li>
+           <ul>
+
             </ul>
         </nav>
-
-        <!--flex container-->
         <div class = container>
-            <div class = visable_box>
-                <main>
-                    <h3>Game description</h3>
 
-                    <p>The game is set in a medieval fantasy world where players take on the role of a survivor.
-                        Their main goal is to survive and progress amidst the chaos and challenges of this new world.
-                        Along the way, they will encounter various characters, make decisions, and face consequences
-                        that shape the outcome of their journey.
-                    </p>
-                </main>
+            <div class=visable_box>
+                <p>Thanks for playing, you collected:</p>
             </div>
 
             <aside>
-                <div class="image_container">
-
-                    <img class="Images" src="{{ url_for('static', filename='img/background4.jpg') }}">
-
-                </div>
+                <ul id="item_list">
+                    {% for item, quantity in collected_items.items() %}
+                    <li><a class="displayitem">{{ item }}: {{ quantity }}</a></li>
+                    {% endfor %}
+                </ul>
             </aside>
 
-            <!--
             <footer class="footer">
-                <h4 class="left-align"></h4>
-                <h4 class="right-align"></h4>
+                <ul>
+                    <li><a href="#" id="closeBtn">Close</a></li>
+                </ul>
             </footer>
-            -->
         </div>
     </body>
 
-
-<script type="module">
+    <script type="module">
 
             //imports the required functions from firebase
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
@@ -80,28 +65,31 @@
             const app = initializeApp(firebaseConfig);
             const auth = getAuth(app);
             let user_id = undefined
-
             //When page is loaded
             onAuthStateChanged(auth, user =>{
                 //if a user is logged in display user in console
                 if(user) {
                     user_id = user.uid
                     console.log('user logged in: ', user)
+
                 } else {
                     //display no user in console
                     console.log('user logged out')
                 }
             })
 
-            const game_saved = document.getElementById('game_saved_btn');
+    </script>
 
-            game_saved.addEventListener('click', function (event) {
-                event.preventDefault(); // Prevent default link behavior
+    <script>
+        // Get references to the buttons
+        const restartBtn = document.getElementById('restartBtn');
+        const closeBtn = document.getElementById('closeBtn');
 
-                console.log('user', user_id)
-                window.location.href = `/index/game_saved/${user_id}`;
+        closeBtn.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default link behavior
 
-            });
-</script>
+            window.location.href = '/index';
+        });
 
+    </script>
 </html>

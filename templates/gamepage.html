@@ -39,7 +39,6 @@
             <footer class="footer">
                 <ul>
                     <li><a href="#" id="restartBtn">Restart</a></li>
-                    <li><a href="#" id="backBtn">Back</a></li>
                     <li><a href="#" id="saveBtn">Save</a></li>
                     <li><a href="#" id="closeBtn">Close</a></li>
                 </ul>
@@ -67,11 +66,13 @@
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
             const auth = getAuth(app);
+            let user_id = undefined
             //When page is loaded
             onAuthStateChanged(auth, user =>{
                 //if a user is logged in display user in console
                 if(user) {
-                    console.log('user logged in: ', user.uid)
+                    user_id = user.uid
+                    console.log('user logged in: ', user)
 
                 } else {
                     //display no user in console
@@ -79,18 +80,18 @@
                 }
             })
 
-             const saveBtn = document.getElementById('saveBtn');
+            const saveBtn = document.getElementById('saveBtn');
 
             saveBtn.addEventListener('click', function (event) {
                     event.preventDefault(); // Prevent default link behavior
 
-                    console.log('user', user.uid)
+                    console.log('user', user_id)
                     fetch('/index/game/save_progress', {
                         method: 'POST',
                         headers: {
                                 'Content-Type': 'application/json' // Set the content type to JSON
                             },
-                            body: JSON.stringify({ firebase_user_id: user.uid }) // Include the Firebase user ID in the request body
+                            body: JSON.stringify({ firebase_user_id: user_id }) // Include the Firebase user ID in the request body
                     })
                     .then(response => response.json())
                     .then(data => {
@@ -98,7 +99,7 @@
                         // Optionally handle success or display a message
                     })
                     .catch(error => {
-                        console.error('Error:', error);
+                        console.error('Error:' + error);
                     });
             });
     </script>
@@ -106,7 +107,6 @@
     <script>
         // Get references to the buttons
         const restartBtn = document.getElementById('restartBtn');
-        const backBtn = document.getElementById('backBtn');
         const closeBtn = document.getElementById('closeBtn');
 
 
@@ -128,40 +128,6 @@
             });
         });
 
-        backBtn.addEventListener('click', function (event) {
-            event.preventDefault();
-
-            // Make an AJAX request to the server to trigger the 'go back' action
-            fetch('/index/game/go_back', {
-                method: 'POST',
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.content) {
-                        // Handle the response data (new content) here
-                        console.log(data.content);
-                        updateGameContent(data.content);
-                        window.location.reload();
-                    } else {
-                        console.log('Cannot go back.'); // Handle no previous page case
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-
-        function updateGameContent(content) {
-            // Update the game content on the page based on the received data
-            const pageText = content.text; // Assuming text is present in the response
-            const choices = content.choices; // Assuming choices are present in the response
-
-            // Update the page elements with the new content
-            // Example: Replace the text content of an element with ID 'gameText'
-            document.getElementById('page_text').innerText = pageText;
-            document.getElementById('for choice_name, choice_destination in choices.items()').innerText = choices;
-            // You can update other elements or UI components as needed based on the response
-        }
 
         closeBtn.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default link behavior
