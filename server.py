@@ -43,10 +43,12 @@ def game_page_saved(uid):
 def make_choice(choice_name):
     choice_result = game.make_choice(choice_name)
 
-    if choice_result.get('game_ended'):
-        collected_items = choice_result.get('collected_items')
-        return render_template('endpage.html', collected_items=collected_items)
-
+    try:
+        if choice_result.get('game_ended'):
+            collected_items = choice_result.get('collected_items')
+            return render_template('endpage.html', collected_items=collected_items)
+    except:
+        print('Game restarted')
     page_content = game.get_current_page_content()
     return render_template('gamepage.html', page_text=page_content['text'], choices=page_content['choices'])
 

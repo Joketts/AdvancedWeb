@@ -71,7 +71,6 @@ class CYOAGame:
         self.vial_power = 0  # Reset acquired flags
         self.runes_power = 0
         self.token_power = 0
-
         # Reset previous_page to None
 
 
