@@ -11,7 +11,7 @@ Type=simple
 User=root
 Group=root
 WorkingDirectory=/home/$USER/YcoaGame
-ExecStart=/home/$USER/YcoaGame/bin/waitress-serve --listen=127.0.0.1:5000 Server:app #change your repo with the actual name of your repo
+ExecStart=/home/$USER/YcoaGame/bin/waitress-serve --listen=127.0.0.1:5000 server:app #change your repo with the actual name of your repo
 Restart=always
 
 [Install]
