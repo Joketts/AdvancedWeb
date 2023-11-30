@@ -1,0 +1,8 @@
+webtech-2324-30.napier.ac.uk {
+    reverse_proxy localhost:5000
+    encode zstd gzip
+}
+
+:80 {
+    reverse_proxy localhost:5000
+}   
