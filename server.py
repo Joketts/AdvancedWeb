@@ -62,7 +62,8 @@ def save_progress():
 
 @app.route('/index/game/reset_game', methods=['POST'])
 def reset_game():
-    page_content = game.reset_game()
+    game.reset_game()
+    page_content = game.get_current_page_content()
     return render_template('gamepage.html', page_text=page_content['text'], choices=page_content['choices'])
 
 
