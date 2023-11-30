@@ -1,9 +1,9 @@
-from flask import Flask, render_template, jsonify, request
+from flask import *
 from cyoa_game import CYOAGame, story
 from flask_sqlalchemy import *
 from Database import db, ReviewsSaved
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='Static')
 game = CYOAGame(story)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///PlayerProgress.db'
@@ -15,6 +15,11 @@ with app.app_context():
 
 @app.route("/index")
 def index():
+    return render_template('index.html')
+
+
+@app.route("/")
+def home():
     return render_template('index.html')
 
 
