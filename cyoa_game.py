@@ -1,80 +1,92 @@
 # cyoa_game.py
 
+# Gets the playerProcess database as it is updated from here
 from Database import db, PlayerProgress
 
 
 class CYOAGame:
-    def __init__(self, story):
-        self.story = story
-        self.reset = 'start'
-        self.current_page = 'start'  # Initial page
-        self.previous_page = None
-        self.vial_power = 0
-        self.runes_power = 0
-        self.token_power = 0
 
-    def get_current_page_content(self):
-        return self.story[self.current_page]
+    # Initializes game with story
+    def __init__(game, story):
+        game.story = story
+        # start is first page
+        game.reset = 'start'
+        game.current_page = 'start'
+        # sets inventory items to 0
+        game.vial_power = 0
+        game.runes_power = 0
+        game.token_power = 0
 
-    def make_choice(self, choice_name):
-        current_page = self.story[self.current_page]
+    # Retrieves content for the current page from story
+    def get_current_page_content(game):
+        return game.story[game.current_page]
+
+    def make_choice(game, choice_name):
+        # Handles player choice and updates game state accordingly
+        current_page = game.story[game.current_page]
         if choice_name in current_page['choices']:
-            self.previous_page = self.current_page
-            self.current_page = current_page['choices'][choice_name]
-            if self.current_page == 'drink_liquid':
-                self.vial_power = 1
-            elif self.current_page == 'embrace_power':
-                self.runes_power = 1
-            elif self.current_page == 'keep_token':
-                self.token_power = 1
+            game.current_page = current_page['choices'][choice_name]
 
-            # check for end of game
-            if self.current_page in ('Win', 'End'):
+            # updates inventory items based on location on story path
+            if game.current_page == 'drink_liquid':
+                game.vial_power = 1
+            elif game.current_page == 'embrace_power':
+                game.runes_power = 1
+            elif game.current_page == 'keep_token':
+                game.token_power = 1
+
+            # check for end of game story path
+            if game.current_page in ('Win', 'End'):
                 return {
                     'page_text': current_page['text'],
                     'choices': current_page['choices'],
                     'game_ended': True,
                     'collected_items': {
-                        'Vial': self.vial_power,
-                        'Runes power': self.runes_power,
-                        'Token': self.token_power
+                        'Vial': game.vial_power,
+                        'Runes power': game.runes_power,
+                        'Token': game.token_power
                     }
                 }
-
-            return self.get_current_page_content()
+            # returns content for end page
+            return game.get_current_page_content()
         else:
             return None
 
-    def save_progress(self, player_id):
+    # saves player progress to database
+    def save_progress(game, player_id):
+        # gets player_id from server.py Json
         progress = PlayerProgress.query.filter_by(player_id=player_id).first()
         if not progress:
             progress = PlayerProgress(player_id=player_id)
-        progress.current_page = self.current_page
-        progress.vial_power = self.vial_power
-        progress.runes_power = self.runes_power
-        progress.token_power = self.token_power
+        # saves page info and inventory info
+        progress.current_page = game.current_page
+        progress.vial_power = game.vial_power
+        progress.runes_power = game.runes_power
+        progress.token_power = game.token_power
         db.session.add(progress)
         db.session.commit()
 
-    def load_progress(self, player_id):
+    # Loads player progress from the database
+    def load_progress(game, player_id):
         progress = PlayerProgress.query.filter_by(player_id=player_id).first()
         if progress:
-            self.current_page = progress.current_page
-            self.vial_power = progress.vial_power
-            self.runes_power = progress.runes_power
-            self.token_power = progress.token_power
-            return self.get_current_page_content()
+            game.current_page = progress.current_page
+            game.vial_power = progress.vial_power
+            game.runes_power = progress.runes_power
+            game.token_power = progress.token_power
+            # returns the content
+            return game.get_current_page_content()
 
-    def reset_game(self):
-        self.current_page = self.reset  # Set current_page back to the starting page
-        self.previous_page = None
-        self.vial_power = 0  # Reset acquired flags
-        self.runes_power = 0
-        self.token_power = 0
-        # Reset previous_page to None
+    # Reset function
+    def reset_game(game):
+        # Sets game state back to initial settings
+        game.current_page = game.reset
+        game.vial_power = 0
+        game.runes_power = 0
+        game.token_power = 0
 
 
-# Your story dictionary containing pages and choices
+# story dictionary containing path names, story text and players choices
 story = {
     'start': {
         'text': "You wake up in a clearing, surrounded by dense forest. The air is thick with an unknown scent, "

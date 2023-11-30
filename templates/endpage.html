@@ -69,6 +69,7 @@
             onAuthStateChanged(auth, user =>{
                 //if a user is logged in display user in console
                 if(user) {
+                    //very important allows us to use the user.uid out of the context of firebase
                     user_id = user.uid
                     console.log('user logged in: ', user)
 
@@ -82,12 +83,12 @@
 
     <script>
         // Get references to the buttons
-        const restartBtn = document.getElementById('restartBtn');
         const closeBtn = document.getElementById('closeBtn');
 
+        //event listener for close btn
         closeBtn.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default link behavior
-
+            //redirects to /index page
             window.location.href = '/index';
         });
 

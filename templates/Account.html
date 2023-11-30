@@ -173,10 +173,12 @@
                     <div>Last logged in: ${user.metadata.lastSignInTime}</div>
                 `;
 
+                //very important allows us to use the user.uid out of the context of firebase
                 user_id = user.uid
-                //updates html so account details are shown when account is clicked
-                accountDetails.innerHTML = html;
+
                 //displays user logged in (current user) in console
+                accountDetails.innerHTML = html;
+
 
                 console.log('user logged in: ', user)
             } else {
@@ -187,19 +189,21 @@
             }
         })
 
-        //listening for review
+        // event listener for review form
         document.getElementById('review-form').addEventListener('submit', function (event) {
             event.preventDefault();
 
-            // Get the review text from the form
+            // gets the review text from the input field
             const reviewText = document.getElementById('review-input').value;
 
+            // POST request to save review
             fetch('/index/account/reviews', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json' // Set the content type to JSON
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    //includes firebase ID and review text with Json
                     firebase_user_id: user_id,
                     user_review: reviewText
                 })
@@ -214,12 +218,14 @@
             });
         });
 
-        // Fetch reviews data from the backend and display on the account page
+        // fetches reviews data from database and displays it on page
         fetch('/index/account/reviews_get')
             .then(response => response.json())
             .then(reviews => {
+                //gets table were data will be displayed
                 const reviewsContainer = document.querySelector('.reviews-table tbody');
 
+                //iterates through each review creating table rows to display them
                 reviews.forEach(review => {
                     const row = document.createElement('tr');
                     row.innerHTML = `

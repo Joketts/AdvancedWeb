@@ -85,6 +85,7 @@
             onAuthStateChanged(auth, user =>{
                 //if a user is logged in display user in console
                 if(user) {
+                    //very important allows us to use the user.uid out of the context of firebase
                     user_id = user.uid
                     console.log('user logged in: ', user)
                 } else {
@@ -93,14 +94,17 @@
                 }
             })
 
+            //Get the game_saved button element by ID
             const game_saved = document.getElementById('game_saved_btn');
 
+            // event listener for play_saved_game button
             game_saved.addEventListener('click', function (event) {
                 event.preventDefault(); // Prevent default link behavior
 
                 console.log('user', user_id)
+                //redirects the user starting the game passing through the user_id
+                // so site knows which users progress to use
                 window.location.href = `/index/game_saved/${user_id}`;
-
             });
 </script>
 

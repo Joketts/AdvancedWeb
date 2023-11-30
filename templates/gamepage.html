@@ -71,6 +71,7 @@
             onAuthStateChanged(auth, user =>{
                 //if a user is logged in display user in console
                 if(user) {
+                    //very important allows us to use the user.uid out of the context of firebase
                     user_id = user.uid
                     console.log('user logged in: ', user)
 
@@ -86,17 +87,17 @@
                     event.preventDefault(); // Prevent default link behavior
 
                     console.log('user', user_id)
+                    // sends post request to save progress with user_id joined
                     fetch('/index/game/save_progress', {
                         method: 'POST',
                         headers: {
-                                'Content-Type': 'application/json' // Set the content type to JSON
+                                'Content-Type': 'application/json' // sets content type to Json
                             },
-                            body: JSON.stringify({ firebase_user_id: user_id }) // Include the Firebase user ID in the request body
+                            body: JSON.stringify({ firebase_user_id: user_id }) // includes firebase id in Json
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Progress saved!');
-                        // Optionally handle success or display a message
+                        console.log('Progress saved!')
                     })
                     .catch(error => {
                         console.error('Error:' + error);
@@ -105,22 +106,23 @@
     </script>
 
     <script>
-        // Get references to the buttons
+        // references buttons
         const restartBtn = document.getElementById('restartBtn');
         const closeBtn = document.getElementById('closeBtn');
 
 
-        // Add event listeners and define functions for button actions
+        // event listener for restart button
         restartBtn.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default link behavior
 
+            // sends POST request for resetting the game
             fetch('/index/game/reset_game', {
                     method: 'POST',
             })
             .then(response => response.json())
             .then(data => {
                 console.log('Game restarted!');
-                // Optionally, you can perform additional actions upon game restart
+                //reloads the window to display new content
                 window.location.reload();
             })
             .catch(error => {
@@ -128,10 +130,11 @@
             });
         });
 
-
+        //event listener for close btn
         closeBtn.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent default link behavior
 
+            //redirects to /index page
             window.location.href = '/index';
         });
 

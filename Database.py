@@ -1,8 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 
+# creates SQLAlchemy instance
 db = SQLAlchemy()
 
 
+# Defines model for player progress database
 class PlayerProgress(db.Model):
     __tablename__ = 'player_progress'
     id = db.Column(db.Integer, primary_key=True)
@@ -13,6 +15,7 @@ class PlayerProgress(db.Model):
     token_power = db.Column(db.Integer, default=0)
 
 
+# Defines model for reviews database
 class ReviewsSaved(db.Model):
     __tablename__ = 'reviews_table'
     id = db.Column(db.Integer, primary_key=True)
